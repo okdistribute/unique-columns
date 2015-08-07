@@ -31,3 +31,9 @@ $ cat <tabular-file> | count-duplicates -
 ```
 
 
+## TODO
+
+1. Give a limit for the number of rows to peek on before stopping
+2. Better js interface documentation
+3. Tests
+

@@ -1,6 +1,6 @@
 {
   "name": "count-duplicates",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "count duplicates in a tabular dataset",
   "main": "index.js",
   "bin": {
@@ -14,6 +14,7 @@
   "dependencies": {
     "minimist": "^1.1.2",
     "ndjson": "^1.4.1",
+    "parse-input-stream": "^1.0.1",
     "pump": "^1.0.0",
     "through2": "^2.0.0"
   }
