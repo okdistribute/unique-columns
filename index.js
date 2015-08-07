@@ -4,28 +4,21 @@ var ndjson = require('ndjson')
 
 module.exports = function duplicates (jsonStream, cb) {
   /*
-    {"name": "bob": "age": 24}
-    {"name": "ange": "age": 29}
-    {"name": "karissa": "age": 24}
-    {"name": "john": "age": 29}
-    {"name": "john": "age": 32}
+    jsonStream:
+    {"name": "bob": "age": 24, "id": 1}
+    {"name": "ange": "age": 29, "id": 2}
+    {"name": "karissa": "age": 24, "id": 3}
+    {"name": "john": "age": 29, "id": 4}
+    {"name": "john": "age": 32, "id": 5}
+    {"name": "grayson": "age": 29, "id": 6}
 
-    to ->
+    to -> cb(err, duplicates)
 
-    fieldCounts:
+    duplicates:
     {
-      "name": {
-        "bob": 1,
-        "ange": 1,
-        "karissa": 1,
-        "john": 2
-      },
-      "age": {
-        26: 1,
-        29: 2,
-        24: 2,
-        32: 1
-      }
+      "name": 2,
+      "age": 4,
+      "id": 0
     }
   */
 
