@@ -2,7 +2,7 @@ var through = require('through2')
 var pump = require('pump')
 var ndjson = require('ndjson')
 
-module.exports = function (jsonStream, cb) {
+module.exports = function (jsonStream, args, cb) {
   /*
     jsonStream:
     {"name": "bob": "age": 24, "id": 1}
@@ -22,10 +22,19 @@ module.exports = function (jsonStream, cb) {
     }
   */
 
+  if (args === 'function') {
+    cb = args
+  }
+
+  if (!args) args = {}
+
   var allFields = {}
+
+  var rows = 0
 
   var valueCounter = through.obj(function (row, enc, next) {
     var fields = Object.keys(row) //name, age
+    rows += 1
     for (var i in fields) {
       var field = fields[i] // name
       var rowValue = row[field] // "bob"
@@ -38,9 +47,9 @@ module.exports = function (jsonStream, cb) {
 
   var duplicates = {}
 
+
   pump(jsonStream, valueCounter, function done (err) {
     if (err) return cb(err)
-
     var uniques = []
     var fields = Object.keys(allFields)
 
@@ -49,12 +58,14 @@ module.exports = function (jsonStream, cb) {
       var fieldValues = allFields[field] // { 26: 1, 29: 2, etc.. }
       duplicates[field] = duplicates[field] || 0
       for (var i in fieldValues) {
-        var count = fieldValues[i]
+        var count = parseInt(fieldValues[i])
         if (count > 1) {
-          duplicates[field] = parseInt(duplicates[field]) + parseInt(count)
+          var percent = parseInt((count / rows) * 100)
+          duplicates[field] = parseInt(duplicates[field]) + count
         }
       }
     }
+
     return cb(null, duplicates)
   })
 }

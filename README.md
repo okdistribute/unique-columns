@@ -43,11 +43,12 @@ $ count-duplicates <tabular-file> [--format=csv/ndjson]
 OR
 
 $ cat <tabular-file> | count-duplicates -
-
-OR
-
-$ sql2csv <some-table> | count-duplicates -
 ```
+
+## Options
+
+`--format/-f` : the format in which to expect data. tries to guess if not supplied.
+`--json`: output machine-readable format in json
 
 ## JS usage
 

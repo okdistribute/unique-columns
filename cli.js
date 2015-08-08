@@ -15,7 +15,8 @@ if (!args.format) {
 if (path === '-') var inputStream = process.stdin
 else var inputStream = fs.createReadStream(args._[0])
 
-dupes(inputStream.pipe(parseInputStream(args)), function done (err, duplicates) {
+var stream = inputStream.pipe(parseInputStream(args))
+dupes(stream, args, function done (err, duplicates) {
   if (err) throw err
   if (args.json) return console.log(JSON.stringify(duplicates))
   var output = ''
@@ -31,7 +32,7 @@ dupes(inputStream.pipe(parseInputStream(args)), function done (err, duplicates) 
     else uniques.push(field)
   }
 
-  output += 'uniques:\n'
+  output += '\nuniques:\n'
   uniques.map(function (field) { output += '  ' + field + '\n'})
 
   output += '\nduplicates:\n'
