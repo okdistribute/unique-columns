@@ -2,7 +2,7 @@ var through = require('through2')
 var pump = require('pump')
 var ndjson = require('ndjson')
 
-module.exports = function duplicates (jsonStream, cb) {
+module.exports = function (jsonStream, cb) {
   /*
     jsonStream:
     {"name": "bob": "age": 24, "id": 1}
@@ -35,6 +35,8 @@ module.exports = function duplicates (jsonStream, cb) {
     }
     return next()
   })
+
+  var duplicates = {}
 
   pump(jsonStream, valueCounter, function done (err) {
     if (err) return cb(err)

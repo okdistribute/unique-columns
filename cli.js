@@ -17,6 +17,7 @@ else var inputStream = fs.createReadStream(args._[0])
 
 dupes(inputStream.pipe(parseInputStream(args)), function done (err, duplicates) {
   if (err) throw err
+  if (args.json) return console.log(JSON.stringify(duplicates))
   var output = ''
   var fields = Object.keys(duplicates)
 
