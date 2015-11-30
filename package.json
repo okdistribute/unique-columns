@@ -1,10 +1,23 @@
 {
-  "name": "count-duplicates",
+  "name": "unique-columns",
   "version": "1.0.1",
-  "description": "count duplicates in a tabular dataset",
+  "description": "Finds which columns are unique in tabular data",
   "main": "index.js",
+  "keywords": [
+    "data",
+    "table",
+    "tables",
+    "duplicate",
+    "duplicates",
+    "unique columns",
+    "unique",
+    "columns",
+    "cols",
+    "tabular",
+    "dataset"
+  ],
   "bin": {
-    "count-duplicates": "cli.js"
+    "unique-columns": "cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

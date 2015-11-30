@@ -42,6 +42,6 @@ dupes(stream, args, function done (err, duplicates) {
 })
 
 function usage () {
-  console.log('count-duplicates <tabular-file> [--format=csv,ndjson]')
-  console.log('OR cat <tabular-file> | count-duplicates - [--format=csv,ndjson]')
+  console.log('unique-columns <tabular-file> [--format=csv,ndjson]')
+  console.log('OR cat <tabular-file> | unique-columns - [--format=csv,ndjson]')
 }

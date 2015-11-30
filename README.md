@@ -1,15 +1,19 @@
-count-duplicates
+unique-columns
 ----------------
 
-count-duplicates in a tabular dataset. Useful if you need to quickly see what columns in a table are unique.
-
-count-duplicates is **streaming**, too, which means that running this won't kill your RAM because the table is only loaded into memory one row at a time. Cool!
+Get the unique columns in a dataset. Useful if you need to quickly see what columns in a table are unique. `unique-columns` is **streaming**, too, which means that running this on a very large dataset won't kill your RAM because the table is only loaded into memory one row at a time. Cool!
 
 ```
-npm install -g count-duplicates
+npm install -g unique-columns
 ```
 
 ## Example
+
+Imagine, your worst nightmare. You are given a dataset that contains two different columns that could possibly be the unique identifier. But you aren't sure.
+
+In this case, two of these columns could be unique, 'username' and 'id', but how will you know for sure?
+
+Run `unique-columns people.csv`, of course!
 
 people.csv
 ```
@@ -21,10 +25,8 @@ samantha, 34, 5, sam_does, "making a living, being a person"
 laura, 34, 5, hanna_boss, "continuing to be a badass"
 ```
 
-Here, all fields are unique except 'id' (that's bad!!) and 'age'. count-duplicates spits out which columns are unique and which have duplicates (along with **how many** are duplicates).
-
 ```
-$ count-duplicates people.csv
+$ unique-columns people.csv
 uniques:
    username
    description
@@ -34,15 +36,17 @@ duplicates:
    id: 2
 ```
 
+We see that `id` and `age` contain duplicate values, while `username` and `description` are unique.
+
 ## Usage
-count-duplicates will try to guess the format, but you can supply it if you really want to.
+unique-columns will try to guess the format, but you can supply it if you really want to.
 
 ```
-$ count-duplicates <tabular-file> [--format=csv/ndjson]
+$ unique-columns <tabular-file> [--format=csv/ndjson]
 
 OR
 
-$ cat <tabular-file> | count-duplicates -
+$ cat <tabular-file> | unique-columns -
 ```
 
 ## Options
@@ -50,7 +54,7 @@ $ cat <tabular-file> | count-duplicates -
 `--format/-f` : the format in which to expect data. tries to guess if not supplied.
 `--json`: output machine-readable format in json
 
-## JS usage
+## JavaScript usage
 
 An incoming jsonStream gets turned into a dictionary of the duplicates:
 
@@ -66,9 +70,9 @@ An incoming jsonStream gets turned into a dictionary of the duplicates:
 
 Use it with any parsed json input stream:
 
-```
+```js
 var parseInputStream = require('parse-input-stream')
-var dupes = require('count-duplicates')
+var dupes = require('unique-columns')
 
 var args = {"format": "csv"}
 var jsonStream = process.stdin.pipe(parseInputStream(args))

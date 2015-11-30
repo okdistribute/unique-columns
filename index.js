@@ -47,7 +47,6 @@ module.exports = function (jsonStream, args, cb) {
 
   var duplicates = {}
 
-
   pump(jsonStream, valueCounter, function done (err) {
     if (err) return cb(err)
     var uniques = []
