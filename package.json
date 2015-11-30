@@ -1,6 +1,6 @@
 {
   "name": "unique-columns",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Finds which columns are unique in tabular data",
   "main": "index.js",
   "keywords": [
