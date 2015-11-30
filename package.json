@@ -36,6 +36,7 @@
     "ndjson": "^1.4.1",
     "parse-input-stream": "^1.0.1",
     "pump": "^1.0.0",
+    "tape": "^4.2.2",
     "through2": "^2.0.0"
   }
 }

@@ -1,19 +1,22 @@
 #!/usr/bin/env node
 var args = require('minimist')(process.argv.slice(2))
-var ndjson = require('ndjson')
 var fs = require('fs')
 var parseInputStream = require('parse-input-stream')
 var dupes = require('./')
 
 var path = args._[0]
-if (!path) return usage()
+if (!path) {
+  usage()
+  process.exit(1)
+}
 
 if (!args.format) {
   args.format = 'csv'
 }
 
-if (path === '-') var inputStream = process.stdin
-else var inputStream = fs.createReadStream(args._[0])
+var inputStream
+if (path === '-') inputStream = process.stdin
+else inputStream = fs.createReadStream(args._[0])
 
 var stream = inputStream.pipe(parseInputStream(args))
 dupes(stream, args, function done (err, duplicates) {
@@ -33,10 +36,10 @@ dupes(stream, args, function done (err, duplicates) {
   }
 
   output += '\nuniques:\n'
-  uniques.map(function (field) { output += '  ' + field + '\n'})
+  uniques.map(function (field) { output += '  ' + field + '\n' })
 
   output += '\nduplicates:\n'
-  dupes.map(function (dupe) { output += '  ' + dupe['field'] + ': ' + dupe['count']  + '\n'})
+  dupes.map(function (dupe) { output += '  ' + dupe['field'] + ': ' + dupe['count'] + '\n' })
 
   console.log(output)
 })

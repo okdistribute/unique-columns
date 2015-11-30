@@ -1,6 +1,8 @@
 unique-columns
 ----------------
 
+ [![Travis](http://img.shields.io/travis/karissa/unique-columns.svg?style=flat)](https://travis-ci.org/karissa/unique-columns)
+
 Get the unique columns in a dataset. Useful if you need to quickly see what columns in a table are unique. `unique-columns` is **streaming**, too, which means that running this on a very large dataset won't kill your RAM because the table is only loaded into memory one row at a time. Cool!
 
 ```
