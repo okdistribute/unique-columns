@@ -88,5 +88,3 @@ dupes(jsonStream, function done (err, duplicates) {
 ## TODO
 
 1. Give a limit for the number of rows to peek on before stopping
-3. Tests
-4. Give percentage of duplicates along with absolute values
